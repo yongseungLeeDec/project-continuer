@@ -2,6 +2,7 @@ package com.conti.springboot.service.posts;
 
 import com.conti.springboot.domain.posts.Posts;
 import com.conti.springboot.domain.posts.PostsRepository;
+import com.conti.springboot.web.dto.PostsListResponseDto;
 import com.conti.springboot.web.dto.PostsResponseDto;
 import com.conti.springboot.web.dto.PostsSaveRequestDto;
 import com.conti.springboot.web.dto.PostsUpdateRequestDto;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -34,5 +37,10 @@ public class PostsService {
         Posts entity = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No such post. id=" + id));
 
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 }
