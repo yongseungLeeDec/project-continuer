@@ -1,12 +1,33 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>SpringBoot WebService</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-
-<body>
+{{>layout/header}}
     <h1>WebService fueled by SpringBoot</h1>
-</body>
 
-</html>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/posts/save" role="button" class="btn btn-primary">Upload post</a>
+            </div>
+        </div>
+        <br>
+        <!-- print post list-->
+        <table class="table table-horizontal table-bordered">
+            <thread class="thread-strong">
+            <tr>
+                <th>post number</th>
+                <th>title</th>
+                <th>author</th>
+                <th>last modified date</th>
+            </tr>
+            </thread>
+            <tbody id="tbody">
+            {{#posts}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{title}}</td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/posts}}
+            </tbody>
+        </table>
+    </div>
+{{>layout/footer}}
